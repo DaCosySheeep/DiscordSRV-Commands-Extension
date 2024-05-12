@@ -1,0 +1,15 @@
+#Server manager role
+#Configure roles for /stop and /restart commands
+#If not supplied, defaults to users with administrator permission
+#e.g. server-manager-role: [00000000000000000]
+server-manager-roles: []
+
+#Configure roles for /whitelist add & /whitelist remove commands
+#If no role supplied, will use server-manager-roles
+whitelist-manager-roles: []
+#Configure roles for /whitelist list command
+#If no role supplied, will use server-manager-roles
+#whitelist managers always have whitelist viewer
+#can be set to 'everyone' e.g. ['everyone']
+#else use a list [0000000, 000000000]
+whitelist-viewer-roles: []
