@@ -1,0 +1,28 @@
+name: Update Modrinth Page
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update_modrinth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get README content
+        id: readme
+        run: |
+          # Escape special characters in README content for JSON
+          escaped_content=$(jq -Rs . <<< "$(cat README.md)")
+          echo "::set-output name=escaped_content::$escaped_content"
+
+      - name: Update Modrinth Body
+        run: |
+          curl -X PATCH \
+            -H "Authorization: Bearer ${{ secrets.MODRINTH_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"body":${{steps.readme.outputs.escaped_content}} }' \
+            "https://api.modrinth.com/v2/project/discordsrv-commands-extension"
