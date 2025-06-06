@@ -14,7 +14,7 @@ public class ReloadConfig implements CommandExecutor {
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender.hasPermission("DiscordsrvCommandsExtension.reloadconfig")) {
+        if (sender.hasPermission("DiscordsrvCommandsExtension.reload")) {
             plugin.reloadConfig();
             FileConfiguration config = plugin.getConfig();
             plugin.serverManagerRoles = config.getStringList("server-manager-roles");

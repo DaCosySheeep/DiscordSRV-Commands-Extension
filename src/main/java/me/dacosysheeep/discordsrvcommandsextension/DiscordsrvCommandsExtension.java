@@ -164,7 +164,7 @@ public final class DiscordsrvCommandsExtension extends JavaPlugin implements Lis
         boolean serverManager = roles.stream().anyMatch(role -> serverManagerRoles.contains(valueOf(role.getIdLong())));
         if (serverManager) {
             e.getHook().sendMessage("Restarting the server.").queue();
-            Bukkit.getScheduler().runTask(this, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop"));
+            Bukkit.getScheduler().runTask(this, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart"));
         } else {
             e.getHook().sendMessage("You don't have permission to do that.").queue();
         }
