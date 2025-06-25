@@ -30,7 +30,7 @@ jobs:
       - name: Upload plugin .jar
         uses: actions/upload-artifact@v4
         with:
-          name: plugin-jar
+          name: plugin.jar
           path: target/DiscordSRV-Commands-Extension-*.jar
 
       
