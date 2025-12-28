@@ -8,6 +8,8 @@ depend: [DiscordSRV]
 softdepend:
   - FloodGate
   - Geyser-Spigot
+  - SuperVanish
+  - PremiumVanish
 authors: [DaCosySheeep]
 description: Adds some commands to discordsrv
 website: https://dacosysheeep.me

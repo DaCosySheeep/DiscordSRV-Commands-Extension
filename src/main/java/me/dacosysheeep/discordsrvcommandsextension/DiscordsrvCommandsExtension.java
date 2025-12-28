@@ -16,6 +16,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -29,6 +30,16 @@ public final class DiscordsrvCommandsExtension extends JavaPlugin implements Lis
     public List<String> serverManagerRoles = config.getStringList("server-manager-roles");
     public List<String> whitelistManagerRoles = config.getStringList("whitelist-manager-roles");
     public List<String> whitelistViewerRoles = config.getStringList("whitelist-viewer-roles");
+
+    private boolean isVanished(Player player) {
+        if (Bukkit.getPluginManager().isPluginEnabled("SuperVanish") || Bukkit.getPluginManager().isPluginEnabled("PremiumVanish")) {
+            for (MetadataValue meta : player.getMetadata("vanished")) {
+                if (meta.asBoolean()) return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onEnable() {
         // Plugin startup logic
@@ -64,6 +75,7 @@ public final class DiscordsrvCommandsExtension extends JavaPlugin implements Lis
                 new PluginSlashCommand(this, new CommandData("stop", "Stop the server")
                         .setDefaultEnabled(false)),
                 new PluginSlashCommand(this, new CommandData("list", "Lists the online players")
+                        //.addOption(OptionType.BOOLEAN, "ephemeral", "Set whether to use an ephemeral response", false)
                         .setDefaultEnabled(false))
         ));
     }
